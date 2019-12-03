@@ -1,0 +1,10 @@
+docker build -t frontend:latest frontend
+docker run -v $PWD/frontend:/app frontend:latest npx create-react-app smartokr
+mv frontend/smartokr/* frontend/smartokr/.gitignore frontend/ && rmdir frontend/smartokr
+docker run -v $PWD/frontend:/app -p 3000:3000 frontend:latest npm start
+
+#docker build -t backend:latest backend
+#docker run -v $PWD/backend:/app/backend backend:latest django-admin startproject smartokr .
+#docker run -v $PWD/backend:/app/backend -p 8000:8000 backend:latest
+
+docker-compose up --force-recreate 
