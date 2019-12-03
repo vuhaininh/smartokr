@@ -8,3 +8,4 @@ docker run -v $PWD/frontend:/app -p 3000:3000 frontend:latest npm start
 #docker run -v $PWD/backend:/app/backend -p 8000:8000 backend:latest
 
 docker-compose up --force-recreate 
+docker-compose up --build
