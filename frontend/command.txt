@@ -9,3 +9,7 @@ docker run -v $PWD/frontend:/app -p 3000:3000 frontend:latest npm start
 
 docker-compose up --force-recreate 
 docker-compose up --build
+
+docker-compose run --rm backend python3 manage.py startapp personal_okr
+docker-compose run --rm backend python3 manage.py migrate
+autopep8 --in-place --aggressive --aggressive tests.py
