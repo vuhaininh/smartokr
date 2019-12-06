@@ -16,3 +16,4 @@ python3 manage.py createsuperuser
 autopep8 --in-place --aggressive --aggressive tests.py
 docker-compose run backend sh -c  "python3 manage.py test"
 docker-compose run --rm backend sh -c "python3 manage.py test && flake8"
+python.jediEnabled
