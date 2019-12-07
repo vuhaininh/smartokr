@@ -1,8 +1,14 @@
 from django.db import models
-# from django.conf import settings
+from django.conf import settings
 
 
-class Objective(models.Model):
+class Tag(models.Model):
+    """Tag to be used for a objective"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
 
-    description = models.CharField(max_length=1000)
-    finished_date = models.DateField()
+    def __str__(self):
+        return self.name
