@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')),
-    path('api/personal_okr/', include('personal_okr.urls')),
+    path('api/personal-okr/', include('personal_okr.urls')),
 ]

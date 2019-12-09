@@ -25,7 +25,8 @@ class TagViewSet(viewsets.GenericViewSet,
 
 
 class ObjectiveViewSet(viewsets.GenericViewSet,
-                       mixins.ListModelMixin):
+                       mixins.ListModelMixin,
+                       mixins.CreateModelMixin):
     """Manage objectives in the database"""
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -36,3 +37,7 @@ class ObjectiveViewSet(viewsets.GenericViewSet,
         """Return objects for the current authenticated user"""
         return self.queryset.filter(user=self.request.user)\
             .order_by('-description')
+
+    def perform_create(self, serializer):
+        """Create a new objective"""
+        serializer.save(user=self.request.user)

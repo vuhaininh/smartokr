@@ -63,3 +63,22 @@ class PrivateObjectivesApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['description'], objective.description)
+
+    def test_create_objective_successful(self):
+        """Test create a new objective"""
+        payload = {'description': 'Test Description',
+                   'finished_date': '2020-01-01'}
+        self.client.post(OBJECTIVES_URL, payload)
+        exists = Objective.objects.filter(
+            user=self.user,
+            description=payload['description'],
+            finished_date=payload['finished_date'],
+        ).exists()
+
+        self.assertTrue(exists)
+
+    def test_create_objective_invalid(self):
+        """Test creating invalid objective fails"""
+        payload = {'description': ''}
+        res = self.client.post(OBJECTIVES_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

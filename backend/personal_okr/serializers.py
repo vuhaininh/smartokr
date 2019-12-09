@@ -14,5 +14,5 @@ class ObjectiveSerializer(serializers.ModelSerializer):
     """Serializer for objective objects"""
     class Meta:
         model = Objective
-        fields = ('id', 'user', 'description', 'finished_date')
+        fields = ('id', 'description', 'finished_date')
         read_only_fields = ('id',)
