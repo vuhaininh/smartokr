@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from personal_okr.models import Tag, Objective
+from personal_okr.models import Tag, Objective, KeyResult
 from personal_okr import serializers
 
 
@@ -37,3 +37,14 @@ class ObjectiveViewSet(BasePersonalOkrAttrViewSet):
         """Return objects for the current authenticated user"""
         return self.queryset.filter(user=self.request.user)\
             .order_by('-description')
+
+
+class KeyResultViewSet(BasePersonalOkrAttrViewSet):
+    """Manage key results in database"""
+    serializer_class = serializers.KeyResultSerializer
+    queryset = KeyResult.objects.all()
+
+    def get_queryset(self):
+        """Return objects for the current authenticated user"""
+        return self.queryset.filter(user=self.request.user)\
+            .order_by('-id')

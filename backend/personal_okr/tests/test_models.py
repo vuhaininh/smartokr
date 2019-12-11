@@ -9,10 +9,18 @@ def sample_user(email='test@devapp.com', password='testpass'):
 
 
 class ModelTests(TestCase):
+    def setUp(self):
+        self.user = sample_user()
+        self.objective = models.Objective.objects.create(
+            user=self.user,
+            description="Improve the customer service",
+            finished_date='2019-11-20'
+        )
+
     def test_tag_str(self):
         """Test the tag string representation"""
         tag = models.Tag.objects.create(
-            user=sample_user(),
+            user=self.user,
             name='Vegan'
         )
         self.assertEqual(str(tag), tag.name)
@@ -20,8 +28,18 @@ class ModelTests(TestCase):
     def test_objective_str(self):
         """Test the objective string representation"""
         objective = models.Objective.objects.create(
-            user=sample_user(),
+            user=self.user,
             description="Improve the customer service",
             finished_date='2019-11-20'
         )
         self.assertEqual(str(objective), objective.description)
+
+    def test_KeyResult_str(self):
+        """Test the key result string representation"""
+        key_result = models.KeyResult.objects.create(
+            objective=self.objective,
+            description='Get 30 customers',
+            finished_date='2019-09-09',
+            user=self.user
+        )
+        self.assertEqual(str(key_result), key_result.description)

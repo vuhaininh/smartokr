@@ -4,3 +4,4 @@ from personal_okr import models
 
 admin.site.register(models.Tag)
 admin.site.register(models.Objective)
+admin.site.register(models.KeyResult)
